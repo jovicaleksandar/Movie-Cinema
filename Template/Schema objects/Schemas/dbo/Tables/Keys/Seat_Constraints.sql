@@ -1,0 +1,1 @@
+ALTER TABLE seat ADD CONSTRAINT seat_pk PRIMARY KEY ( seatid );

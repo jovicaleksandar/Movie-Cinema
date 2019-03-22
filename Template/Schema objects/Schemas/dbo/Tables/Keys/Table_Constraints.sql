@@ -1,0 +1,1 @@
+ALTER TABLE "Table" ADD CONSTRAINT table_pk PRIMARY KEY ( tableid );

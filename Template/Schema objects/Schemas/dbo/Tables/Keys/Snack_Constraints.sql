@@ -1,0 +1,1 @@
+ALTER TABLE snack ADD CONSTRAINT snack_pk PRIMARY KEY ( snackid );

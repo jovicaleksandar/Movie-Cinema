@@ -1,0 +1,195 @@
+﻿<Window x:Class="WPFMovieTheatre.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFMovieTheatre"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="657.9" Width="1160">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Admin">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/Images/retroMovieCinema.jpg" Stretch="UniformToFill"/>
+                    </Grid.Background>
+                    <DataGrid Background="Transparent" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding AllAdmins, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedAdmin, UpdateSourceTrigger=PropertyChanged}" Margin="0,-1,366,202.2" Grid.Column="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Admin Name" Binding="{Binding employeename, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                            <DataGridTextColumn Header="Admin Surname" Binding="{Binding employeesurname, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                            <DataGridTextColumn Header="Admin Username" Binding="{Binding employeeusername, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                            <DataGridTextColumn Header="Admin Email" Binding="{Binding employeeemail, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Label Content="Admin Name" HorizontalAlignment="Left" Margin="857,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.124,-0.294" Width="101" Background="White"/>
+                    <Label Content="Admin Surname" HorizontalAlignment="Left" Margin="857,66,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Background="White" Width="101"/>
+                    <Label Content="Admin Username" HorizontalAlignment="Left" Margin="857,127,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Background="White" Width="101" Height="26"/>
+                    <Label Content="Admin Email" HorizontalAlignment="Left" Margin="857,188,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Width="101" Background="White" Height="26"/>
+                    <TextBox Name="AdminName" Text="{Binding AdminName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="27" Margin="992,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.541,-9.495"/>
+                    <TextBox Name="AdminSurname" Text="{Binding AdminSurname, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="992,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.518,6.572"/>
+                    <TextBox Name="AdminUsername" Text="{Binding AdminUsername, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="992,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.518,6.572"/>
+                    <TextBox Name="AdminEmail" Text="{Binding AdminEmail, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="992,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.518,6.572"/>
+                    <Button Content="Add New Admin" HorizontalAlignment="Left" Margin="992,285,0,0" VerticalAlignment="Top" Width="113" Height="27" Command="{Binding AddAdminCommand}"/>
+                    <Button Content="Edit Admin" HorizontalAlignment="Left" Margin="845,285,0,0" VerticalAlignment="Top" Width="113" Height="27" Command="{Binding EditAdminCommand}"/>
+                    <Button Content="Remove Admin" HorizontalAlignment="Left" Margin="10,453,0,0" VerticalAlignment="Top" Width="113" Height="27" Command="{Binding RemoveAdminCommand}" RenderTransformOrigin="0.45,0.83"/>
+                </Grid>
+
+
+            </TabItem>
+            <TabItem Header="Waiter">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/Images/Cafe.jpg" Stretch="UniformToFill"/>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="178*"/>
+                        <ColumnDefinition Width="18*"/>
+                        <ColumnDefinition Width="944*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid Background="Transparent" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding AllDrinks, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedDrink, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,816,290.2" Grid.ColumnSpan="4">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Drink Name" Binding="{Binding drinkname, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                            <DataGridTextColumn Header="Drink Price" Binding="{Binding drinkprice, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Remove Drink" HorizontalAlignment="Left" Margin="19.1,330,0,0" VerticalAlignment="Top" Width="116" Height="27" Command="{Binding RemoveDrinkCommand}" RenderTransformOrigin="0.472,1.719" Grid.Column="1"/>
+
+                    <Button Content="Edit Drink" HorizontalAlignment="Left" Margin="135.2,562,0,0" VerticalAlignment="Top" Width="85" Height="27" Command="{Binding EditDrinkCommand}" Grid.Column="1" RenderTransformOrigin="3.642,1.17" Grid.ColumnSpan="3"/>
+
+                    <DataGrid Background="Transparent" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding AllTables, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedTable, UpdateSourceTrigger=PropertyChanged}" Margin="133,0,486,290.2" Grid.Column="3">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Table Name" Binding="{Binding tablename, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Get Bills" HorizontalAlignment="Left" Margin="133.2,330,0,0" VerticalAlignment="Top" Width="100" Height="27" Command="{Binding GetBillsCommand}" Grid.Column="3"/>
+                    <Button Content="Get Average Price" HorizontalAlignment="Left" Margin="357.2,331,0,0" VerticalAlignment="Top" Width="100" Height="26" Command="{Binding GetAvgPriceCommand}" Grid.Column="3"/>
+
+                    <Label Content="Drink Name" HorizontalAlignment="Left" Margin="10.2,476,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.124,-0.294" Grid.Column="1" Background="#FFFCFCFC" Width="81"/>
+                    <Label Content="Drink Price" HorizontalAlignment="Left" Margin="10.2,522,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Grid.Column="1" Background="White" Width="81"/>
+                    <TextBox Name="dName" Text="{Binding DrinkName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="135.2,476,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.541,-9.495" Grid.Column="1" Grid.ColumnSpan="3"/>
+                    <TextBox Name="dPrice" Text="{Binding DrinkPrice, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="135.2,522,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.518,6.572" Grid.Column="1" Grid.ColumnSpan="3"/>
+                    <Button Content="Add Drink" HorizontalAlignment="Left" Margin="10.2,562,0,0" VerticalAlignment="Top" Width="81" Height="27" Command="{Binding AddDrinkCommand}" RenderTransformOrigin="0.622,5.244" Grid.Column="1"/>
+
+                    <DataGrid Margin="0,0,10,395.2" Background="Transparent" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding AllWaiters, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedWaiter, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" HorizontalAlignment="Right" Width="461">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Waiter Name" Binding="{Binding employeename, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                            <DataGridTextColumn Header="Waiter Surname" Binding="{Binding employeesurname, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                            <DataGridTextColumn Header="Waiter Username" Binding="{Binding employeeusername, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                            <DataGridTextColumn Header="Waiter Email" Binding="{Binding employeeemail, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Label Content="Waiter Name" HorizontalAlignment="Left" Margin="558.2,259,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.124,-0.294" Width="101" Grid.Column="3" Background="White"/>
+                    <Label Content="Waiter Surname" HorizontalAlignment="Left" Margin="558.2,294,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Grid.Column="3" Width="101" Background="White"/>
+                    <Label Content="Waiter Username" HorizontalAlignment="Left" Margin="558.2,331,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Grid.Column="3" Width="101" Background="White"/>
+                    <Label Content="Waiter Email" HorizontalAlignment="Left" Margin="558.2,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Width="101" Grid.Column="3" Background="White"/>
+                    <TextBox Name="WaiterName" Text="{Binding WaiterName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="25" Margin="701.2,259,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.541,-9.495" Grid.Column="3"/>
+                    <TextBox Name="WaiterSurname" Text="{Binding WaiterSurname, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="701.2,294,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.518,6.572" Grid.Column="3"/>
+                    <TextBox Name="WaiterUsername" Text="{Binding WaiterUsername, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="701.2,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.518,6.572" Grid.Column="3"/>
+                    <TextBox Name="WaiterEmail" Text="{Binding WaiterEmail, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="701.2,379,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.518,6.572" Grid.Column="3"/>
+                    <Button Content="Add New Waiter" HorizontalAlignment="Left" Margin="539.2,461,0,0" VerticalAlignment="Top" Width="113" Height="27" Command="{Binding AddWaiterCommand}" Grid.Column="3"/>
+                    <Button Content="Edit Waiter" HorizontalAlignment="Left" Margin="676.2,461,0,0" VerticalAlignment="Top" Width="113" Height="27" Command="{Binding EditWaiterCommand}" Grid.Column="3"/>
+                    <Button Content="Remove Waiter" HorizontalAlignment="Left" Margin="820.2,461,0,0" VerticalAlignment="Top" Width="113" Height="27" Command="{Binding RemoveWaiterCommand}" RenderTransformOrigin="0.45,0.83" Grid.Column="3"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Ticket Seller">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/Images/CinemaPopcorn.jpg" Stretch="UniformToFill"/>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="73*"/>
+                        <ColumnDefinition Width="1076*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Snack Name" HorizontalAlignment="Left" Margin="289.5,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.124,-0.294" Height="26" Width="75" Grid.Column="1" Background="White"/>
+                    <Label Content="Snack Price" HorizontalAlignment="Left" Margin="393.2,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Height="25" Width="71" Grid.Column="1" Background="#FFFDFCFC"/>
+                    <TextBox Name="snackName" Text="{Binding SnackName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="289.2,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.541,-9.495" Grid.Column="1"/>
+                    <TextBox Name="snackPrice" Text="{Binding SnackPrice, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="393.2,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71" RenderTransformOrigin="0.518,6.572" Grid.Column="1"/>
+                    <Button Content="Add Snack" HorizontalAlignment="Left" Margin="321.5,106,0,0" VerticalAlignment="Top" Width="143" Height="27" Command="{Binding AddSnackCommand}" Grid.Column="1"/>
+
+                    <DataGrid Margin="490.5,0,10,395.2" Background="Transparent" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding AllSnacks, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedSnack, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Snack Name" Binding="{Binding snackname, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                            <DataGridTextColumn Header="Snack Price" Binding="{Binding snackprice, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Button Content="Remove Snack" HorizontalAlignment="Left" Margin="922.5,260,0,0" VerticalAlignment="Top" Width="143" Height="27" Command="{Binding RemoveSnackCommand}" RenderTransformOrigin="0.403,0.441" Grid.Column="1"/>
+
+
+                    <Label Content="Snack Price" HorizontalAlignment="Left" Margin="410.2,221,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Height="26" Width="69" Grid.Column="1" Background="White"/>
+
+                    <TextBox Name="snackEditPrice" Text="{Binding SnackEditPrice, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="490.5,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="124" RenderTransformOrigin="0.518,6.572" Grid.Column="1"/>
+                    <Button Content="Edit Snack" HorizontalAlignment="Left" Margin="490.5,260,0,0" VerticalAlignment="Top" Width="124" Height="27" Command="{Binding EditSnackCommand}" Grid.Column="1"/>
+
+
+                    <Label Content="Movie Name" HorizontalAlignment="Left" Margin="7,462,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.124,-0.294" Height="25" Width="84" Grid.ColumnSpan="2" Background="White"/>
+                    <Label Content="Movie Price" HorizontalAlignment="Right" Margin="0,462,930,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Height="25" Width="82" Grid.Column="1" Background="White"/>
+                    <TextBox Name="movieName" Text="{Binding MovieName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="7,499,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" RenderTransformOrigin="0.541,-9.495" Grid.ColumnSpan="2"/>
+                    <TextBox Name="moviePrice" Text="{Binding MoviePrice, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="53.2,499,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" RenderTransformOrigin="0.518,6.572" Grid.Column="1"/>
+                    <Button Content="Add Ticket" HorizontalAlignment="Left" Margin="7,546,0,0" VerticalAlignment="Top" Width="84" Height="27" Command="{Binding AddMovieCommand}" RenderTransformOrigin="0.573,2.815" Grid.ColumnSpan="2"/>
+                    <Button Content="Edit Ticket" HorizontalAlignment="Left" Margin="53.2,545,0,0" VerticalAlignment="Top" Width="84" Height="27" Command="{Binding EditMovieCommand}" RenderTransformOrigin="0.573,2.815" Grid.Column="1"/>
+
+                    <DataGrid Margin="0,0,844,312.2" Background="Transparent" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding AllMovies, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedMovie, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Movie Name" Binding="{Binding ticketmoviename, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                            <DataGridTextColumn Header="Movie Price" Binding="{Binding ticketprice, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                            <DataGridTextColumn Header="Movie Price" Binding="{Binding ticketdatetime, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Button Content="Remove Movie" HorizontalAlignment="Left" Margin="10,312,0,0" VerticalAlignment="Top" Width="143" Height="27" Command="{Binding RemoveMovieCommand}" Grid.ColumnSpan="2"/>
+
+                    <Label Content="Ticket Seller Name" HorizontalAlignment="Left" Margin="290.2,405,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.124,-0.294" Width="121" Grid.Column="1" Background="White"/>
+                    <Label Content="Ticket Seller Surname" HorizontalAlignment="Left" Margin="290.2,454,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Width="121" Grid.Column="1" Background="White"/>
+                    <Label Content="Ticket Seller Username" HorizontalAlignment="Left" Margin="289.2,504,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Grid.Column="1" Background="White" Width="122"/>
+                    <Label Content="Ticket Seller Email" HorizontalAlignment="Left" Margin="290.2,546,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Width="121" Grid.Column="1" Background="White"/>
+                    <TextBox Name="TicketSellerName" Text="{Binding TicketSellerName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="439.5,405,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.541,-9.495" Grid.Column="1"/>
+                    <TextBox Name="TicketSellerSurname" Text="{Binding TicketSellerSurname, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="439.5,453,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.518,6.572" Grid.Column="1"/>
+                    <TextBox Name="TicketSellerUsername" Text="{Binding TicketSellerUsername, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="439.5,504,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.518,6.572" Grid.Column="1"/>
+                    <TextBox Name="TicketSellerEmail" Text="{Binding TicketSellerEmail, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="26" Margin="439.5,547,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.518,6.572" Grid.Column="1"/>
+                    <Button Content="Add New Ticket Seller" HorizontalAlignment="Left" Margin="564.5,453,0,0" VerticalAlignment="Top" Width="113" Height="26" Command="{Binding AddTicketSellerCommand}" Grid.Column="1"/>
+                    <Button Content="Edit Ticket Seller" HorizontalAlignment="Left" Margin="564.5,504,0,0" VerticalAlignment="Top" Width="113" Height="26" Command="{Binding EditTicketSellerCommand}" RenderTransformOrigin="1.102,0.596" Grid.Column="1"/>
+                    <Button Content="Remove Ticket Seller" HorizontalAlignment="Left" Margin="564.5,547,0,0" VerticalAlignment="Top" Width="113" Height="25" Command="{Binding RemoveTicketSellerCommand}" RenderTransformOrigin="0.45,0.83" Grid.Column="1"/>
+
+
+                    <DataGrid Background="Transparent" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding AllTicketSellers, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedTicketSeller, UpdateSourceTrigger=PropertyChanged}" Margin="691.5,371,10,26.2" Grid.Column="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Ticket Seller Name" Binding="{Binding employeename, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                            <DataGridTextColumn Header="Ticket Seller Surname" Binding="{Binding employeesurname, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                            <DataGridTextColumn Header="Ticket Seller Username" Binding="{Binding employeeusername, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                            <DataGridTextColumn Header="Ticket Seller Email" Binding="{Binding employeeemail, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--<Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="27*"/>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition Width="367*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Snack Name" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.124,-0.294" Grid.ColumnSpan="3" Height="26" Width="75"/>
+                    <Label Content="Snack Price" HorizontalAlignment="Left" Margin="46.4,28,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Grid.Column="2" Height="26" Width="71"/>
+                    <TextBox Name="snackName" Text="{Binding SnackName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="10,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" RenderTransformOrigin="0.541,-9.495" Grid.ColumnSpan="3"/>
+                    <TextBox Name="snackPrice" Text="{Binding SnackPrice, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="46.4,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.518,6.572" Grid.Column="2"/>
+                    <Button Content="Add Snack" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top" Width="143" Height="27" Command="{Binding AddSnackCommand}" Grid.ColumnSpan="3"/>
+
+                    <Label Content="Snacks" Margin="161.4,0,443,356.2" Grid.Column="2"/>
+                    <ListBox Name="SnackList" SelectedItem="{Binding SelectedSnack, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding SnacksList, UpdateSourceTrigger=PropertyChanged}" Margin="169.4,46,438,245.2" Grid.Column="2" />
+                    <Button Content="Edit Snacks" HorizontalAlignment="Left" Margin="169.4,165,0,0" VerticalAlignment="Top" Width="92" Height="30" Command="{Binding GetSnackInfoCommand}" Grid.Column="2"/>
+
+                    <Label Content="Movie Name" HorizontalAlignment="Left" Margin="444.4,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.124,-0.294" Height="35" Width="82" Grid.Column="2"/>
+                    <Label Content="Movie Price" HorizontalAlignment="Left" Margin="603.4,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.562,0.511" Grid.Column="2" Height="25" Width="93"/>
+                    <TextBox Name="movieName" Text="{Binding MovieName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="452.4,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" RenderTransformOrigin="0.541,-9.495" Grid.Column="2"/>
+                    <TextBox Name="moviePrice" Text="{Binding MoviePrice, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="603.4,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39" RenderTransformOrigin="0.518,6.572" Grid.Column="2"/>
+                    <Button Content="Add Ticket" HorizontalAlignment="Left" Margin="452.4,119,0,0" VerticalAlignment="Top" Width="143" Height="27" Command="{Binding AddMovieCommand}" Grid.Column="2"/>
+
+                    <Label Content="Movies" Margin="444.4,211,160,145.2" Grid.Column="2"/>
+                    <ListBox Name="MovieList" SelectedItem="{Binding SelectedMovie, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding MoviesList, UpdateSourceTrigger=PropertyChanged}" Margin="444.4,251,163,40.2" Grid.Column="2" />
+                    <Button Content="Edit Movies" HorizontalAlignment="Left" Margin="604.4,251,0,0" VerticalAlignment="Top" Width="92" Height="30" Command="{Binding GetMovieInfoCommand}" Grid.Column="2"/>-->
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

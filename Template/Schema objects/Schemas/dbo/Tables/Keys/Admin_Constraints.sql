@@ -1,0 +1,1 @@
+ALTER TABLE admin ADD CONSTRAINT admin_pk PRIMARY KEY ( employeeid );

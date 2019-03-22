@@ -1,0 +1,3 @@
+CREATE TABLE bar (
+    barid INTEGER NOT NULL
+);

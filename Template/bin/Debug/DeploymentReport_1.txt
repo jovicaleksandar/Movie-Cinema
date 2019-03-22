@@ -1,0 +1,33 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The type for column billamount in table [dbo].[bill] is currently  BIGINT NULL but is being changed to  INT NULL. Data
+         loss could occur.
+       The type for column drinkprice in table [dbo].[drink] is currently  BIGINT NULL but is being changed to  INT NULL. Data
+         loss could occur.
+       The type for column snackprice in table [dbo].[snack] is currently  BIGINT NULL but is being changed to  INT NULL. Data
+         loss could occur.
+       The type for column ticketprice in table [dbo].[ticket] is currently  BIGINT NULL but is being changed to  INT NULL.
+         Data loss could occur.
+
+** User actions
+     Alter
+       [dbo].[bill] (Table)
+       [dbo].[drink] (Table)
+       [dbo].[snack] (Table)
+       [dbo].[ticket] (Table)
+     Create
+       [dbo].[AvgValue] (Function)
+
+** Supporting actions
+
+The type for column billamount in table [dbo].[bill] is currently  BIGINT NULL but is being changed to  INT NULL. Data loss could occur.
+The type for column drinkprice in table [dbo].[drink] is currently  BIGINT NULL but is being changed to  INT NULL. Data loss could occur.
+The type for column snackprice in table [dbo].[snack] is currently  BIGINT NULL but is being changed to  INT NULL. Data loss could occur.
+The type for column ticketprice in table [dbo].[ticket] is currently  BIGINT NULL but is being changed to  INT NULL. Data loss could occur.
+

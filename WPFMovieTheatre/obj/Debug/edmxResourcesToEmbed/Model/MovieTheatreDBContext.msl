@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NewBioskopModelStoreContainer" CdmEntityContainer="NewBioskopEntities">
+    <EntitySetMapping Name="admins">
+      <EntityTypeMapping TypeName="NewBioskopModel.admin">
+        <MappingFragment StoreEntitySet="admin">
+          <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bars">
+      <EntityTypeMapping TypeName="NewBioskopModel.bar">
+        <MappingFragment StoreEntitySet="bar">
+          <ScalarProperty Name="barid" ColumnName="barid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bills">
+      <EntityTypeMapping TypeName="NewBioskopModel.bill">
+        <MappingFragment StoreEntitySet="bill">
+          <ScalarProperty Name="billid" ColumnName="billid" />
+          <ScalarProperty Name="billamount" ColumnName="billamount" />
+          <ScalarProperty Name="billdatetime" ColumnName="billdatetime" />
+          <ScalarProperty Name="table_tableid" ColumnName="table_tableid" />
+          <ScalarProperty Name="billid1" ColumnName="billid1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="drinks">
+      <EntityTypeMapping TypeName="NewBioskopModel.drink">
+        <MappingFragment StoreEntitySet="drink">
+          <ScalarProperty Name="drinkid" ColumnName="drinkid" />
+          <ScalarProperty Name="drinkname" ColumnName="drinkname" />
+          <ScalarProperty Name="drinkprice" ColumnName="drinkprice" />
+          <ScalarProperty Name="bar_barid" ColumnName="bar_barid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="employees">
+      <EntityTypeMapping TypeName="NewBioskopModel.employee">
+        <MappingFragment StoreEntitySet="employee">
+          <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+          <ScalarProperty Name="employeename" ColumnName="employeename" />
+          <ScalarProperty Name="employeeemail" ColumnName="employeeemail" />
+          <ScalarProperty Name="employeeusername" ColumnName="employeeusername" />
+          <ScalarProperty Name="employeepassword" ColumnName="employeepassword" />
+          <ScalarProperty Name="employeesurname" ColumnName="employeesurname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="movies">
+      <EntityTypeMapping TypeName="NewBioskopModel.movie">
+        <MappingFragment StoreEntitySet="movie">
+          <ScalarProperty Name="movieid" ColumnName="movieid" />
+          <ScalarProperty Name="moviegenre" ColumnName="moviegenre" />
+          <ScalarProperty Name="movieformat" ColumnName="movieformat" />
+          <ScalarProperty Name="movietitle" ColumnName="movietitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="projectionrooms">
+      <EntityTypeMapping TypeName="NewBioskopModel.projectionroom">
+        <MappingFragment StoreEntitySet="projectionroom">
+          <ScalarProperty Name="prjroomid" ColumnName="prjroomid" />
+          <ScalarProperty Name="projectionroomname" ColumnName="projectionroomname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="projections">
+      <EntityTypeMapping TypeName="NewBioskopModel.projection">
+        <MappingFragment StoreEntitySet="projections">
+          <ScalarProperty Name="projectionid" ColumnName="projectionid" />
+          <ScalarProperty Name="projectionroom_prjroomid" ColumnName="projectionroom_prjroomid" />
+          <ScalarProperty Name="admin_employeeid" ColumnName="admin_employeeid" />
+          <ScalarProperty Name="movie_movieid" ColumnName="movie_movieid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seats">
+      <EntityTypeMapping TypeName="NewBioskopModel.seat">
+        <MappingFragment StoreEntitySet="seat">
+          <ScalarProperty Name="seatid" ColumnName="seatid" />
+          <ScalarProperty Name="seatname" ColumnName="seatname" />
+          <ScalarProperty Name="projectionroom_prjroomid" ColumnName="projectionroom_prjroomid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="snacks">
+      <EntityTypeMapping TypeName="NewBioskopModel.snack">
+        <MappingFragment StoreEntitySet="snack">
+          <ScalarProperty Name="snackid" ColumnName="snackid" />
+          <ScalarProperty Name="snackname" ColumnName="snackname" />
+          <ScalarProperty Name="snackprice" ColumnName="snackprice" />
+          <ScalarProperty Name="ticketseller_employeeid" ColumnName="ticketseller_employeeid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tables">
+      <EntityTypeMapping TypeName="NewBioskopModel.Table">
+        <MappingFragment StoreEntitySet="Table">
+          <ScalarProperty Name="tableid" ColumnName="tableid" />
+          <ScalarProperty Name="tablename" ColumnName="tablename" />
+          <ScalarProperty Name="waiter_employeeid" ColumnName="waiter_employeeid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tickets">
+      <EntityTypeMapping TypeName="NewBioskopModel.ticket">
+        <MappingFragment StoreEntitySet="ticket">
+          <ScalarProperty Name="ticketid" ColumnName="ticketid" />
+          <ScalarProperty Name="ticketprice" ColumnName="ticketprice" />
+          <ScalarProperty Name="ticketmoviename" ColumnName="ticketmoviename" />
+          <ScalarProperty Name="ticketseatnumber" ColumnName="ticketseatnumber" />
+          <ScalarProperty Name="ticketdatetime" ColumnName="ticketdatetime" />
+          <ScalarProperty Name="ticketseller_employeeid" ColumnName="ticketseller_employeeid" />
+          <ScalarProperty Name="projectionroom_prjroomid" ColumnName="projectionroom_prjroomid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ticketsellers">
+      <EntityTypeMapping TypeName="NewBioskopModel.ticketseller">
+        <MappingFragment StoreEntitySet="ticketseller">
+          <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="waiters">
+      <EntityTypeMapping TypeName="NewBioskopModel.waiter">
+        <MappingFragment StoreEntitySet="waiter">
+          <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+          <ScalarProperty Name="bar_barid" ColumnName="bar_barid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

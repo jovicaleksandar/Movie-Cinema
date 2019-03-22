@@ -1,0 +1,919 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NewBioskopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="employeeid" />
+          </Key>
+          <Property Name="employeeid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bar">
+          <Key>
+            <PropertyRef Name="barid" />
+          </Key>
+          <Property Name="barid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bill">
+          <Key>
+            <PropertyRef Name="billid" />
+          </Key>
+          <Property Name="billid" Type="int" Nullable="false" />
+          <Property Name="billamount" Type="bigint" />
+          <Property Name="billdatetime" Type="datetime" />
+          <Property Name="table_tableid" Type="int" />
+          <Property Name="billid1" Type="int" />
+        </EntityType>
+        <EntityType Name="drink">
+          <Key>
+            <PropertyRef Name="drinkid" />
+          </Key>
+          <Property Name="drinkid" Type="int" Nullable="false" />
+          <Property Name="drinkname" Type="varchar" MaxLength="20" />
+          <Property Name="drinkprice" Type="bigint" />
+          <Property Name="bar_barid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="employeeid" />
+          </Key>
+          <Property Name="employeeid" Type="int" Nullable="false" />
+          <Property Name="employeename" Type="varchar" MaxLength="20" />
+          <Property Name="employeeemail" Type="varchar" MaxLength="20" />
+          <Property Name="employeeusername" Type="varchar" MaxLength="20" />
+          <Property Name="employeepassword" Type="varchar" MaxLength="20" />
+          <Property Name="employeesurname" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="movie">
+          <Key>
+            <PropertyRef Name="movieid" />
+          </Key>
+          <Property Name="movieid" Type="int" Nullable="false" />
+          <Property Name="moviegenre" Type="varchar" MaxLength="20" />
+          <Property Name="movieformat" Type="varchar" MaxLength="20" />
+          <Property Name="movietitle" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="projectionroom">
+          <Key>
+            <PropertyRef Name="prjroomid" />
+          </Key>
+          <Property Name="prjroomid" Type="int" Nullable="false" />
+          <Property Name="projectionroomname" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="projections">
+          <Key>
+            <PropertyRef Name="projectionid" />
+            <PropertyRef Name="projectionroom_prjroomid" />
+            <PropertyRef Name="movie_movieid" />
+          </Key>
+          <Property Name="projectionid" Type="int" Nullable="false" />
+          <Property Name="projectionroom_prjroomid" Type="int" Nullable="false" />
+          <Property Name="admin_employeeid" Type="int" Nullable="false" />
+          <Property Name="movie_movieid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="seat">
+          <Key>
+            <PropertyRef Name="seatid" />
+          </Key>
+          <Property Name="seatid" Type="int" Nullable="false" />
+          <Property Name="seatname" Type="varchar" MaxLength="20" />
+          <Property Name="projectionroom_prjroomid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="snack">
+          <Key>
+            <PropertyRef Name="snackid" />
+          </Key>
+          <Property Name="snackid" Type="int" Nullable="false" />
+          <Property Name="snackname" Type="varchar" MaxLength="20" />
+          <Property Name="snackprice" Type="bigint" />
+          <Property Name="ticketseller_employeeid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="tableid" />
+          </Key>
+          <Property Name="tableid" Type="int" Nullable="false" />
+          <Property Name="tablename" Type="varchar" MaxLength="20" />
+          <Property Name="waiter_employeeid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ticket">
+          <Key>
+            <PropertyRef Name="ticketid" />
+          </Key>
+          <Property Name="ticketid" Type="int" Nullable="false" />
+          <Property Name="ticketprice" Type="bigint" />
+          <Property Name="ticketmoviename" Type="varchar" MaxLength="20" />
+          <Property Name="ticketseatnumber" Type="varchar" MaxLength="20" />
+          <Property Name="ticketdatetime" Type="datetime" />
+          <Property Name="ticketseller_employeeid" Type="int" Nullable="false" />
+          <Property Name="projectionroom_prjroomid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ticketseller">
+          <Key>
+            <PropertyRef Name="employeeid" />
+          </Key>
+          <Property Name="employeeid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="waiter">
+          <Key>
+            <PropertyRef Name="employeeid" />
+          </Key>
+          <Property Name="employeeid" Type="int" Nullable="false" />
+          <Property Name="bar_barid" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="admin_employee_fk">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="admin" Type="Self.admin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="employeeid" />
+            </Principal>
+            <Dependent Role="admin">
+              <PropertyRef Name="employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bill_table_fk">
+          <End Role="Table" Type="Self.Table" Multiplicity="0..1" />
+          <End Role="bill" Type="Self.bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table">
+              <PropertyRef Name="tableid" />
+            </Principal>
+            <Dependent Role="bill">
+              <PropertyRef Name="table_tableid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="drink_bar_fk">
+          <End Role="bar" Type="Self.bar" Multiplicity="1" />
+          <End Role="drink" Type="Self.drink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bar">
+              <PropertyRef Name="barid" />
+            </Principal>
+            <Dependent Role="drink">
+              <PropertyRef Name="bar_barid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="projections_admin_fk">
+          <End Role="admin" Type="Self.admin" Multiplicity="1" />
+          <End Role="projections" Type="Self.projections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="admin">
+              <PropertyRef Name="employeeid" />
+            </Principal>
+            <Dependent Role="projections">
+              <PropertyRef Name="admin_employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="projections_movie_fk">
+          <End Role="movie" Type="Self.movie" Multiplicity="1" />
+          <End Role="projections" Type="Self.projections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movie">
+              <PropertyRef Name="movieid" />
+            </Principal>
+            <Dependent Role="projections">
+              <PropertyRef Name="movie_movieid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="projections_projectionroom_fk">
+          <End Role="projectionroom" Type="Self.projectionroom" Multiplicity="1" />
+          <End Role="projections" Type="Self.projections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projectionroom">
+              <PropertyRef Name="prjroomid" />
+            </Principal>
+            <Dependent Role="projections">
+              <PropertyRef Name="projectionroom_prjroomid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seat_projectionroom_fk">
+          <End Role="projectionroom" Type="Self.projectionroom" Multiplicity="1" />
+          <End Role="seat" Type="Self.seat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projectionroom">
+              <PropertyRef Name="prjroomid" />
+            </Principal>
+            <Dependent Role="seat">
+              <PropertyRef Name="projectionroom_prjroomid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="snack_ticketseller_fk">
+          <End Role="ticketseller" Type="Self.ticketseller" Multiplicity="1" />
+          <End Role="snack" Type="Self.snack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ticketseller">
+              <PropertyRef Name="employeeid" />
+            </Principal>
+            <Dependent Role="snack">
+              <PropertyRef Name="ticketseller_employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="table_waiter_fk">
+          <End Role="waiter" Type="Self.waiter" Multiplicity="1" />
+          <End Role="Table" Type="Self.Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="waiter">
+              <PropertyRef Name="employeeid" />
+            </Principal>
+            <Dependent Role="Table">
+              <PropertyRef Name="waiter_employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ticket_projectionroom_fk">
+          <End Role="projectionroom" Type="Self.projectionroom" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projectionroom">
+              <PropertyRef Name="prjroomid" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="projectionroom_prjroomid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ticket_ticketseller_fk">
+          <End Role="ticketseller" Type="Self.ticketseller" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ticketseller">
+              <PropertyRef Name="employeeid" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="ticketseller_employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ticketseller_employee_fk">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="ticketseller" Type="Self.ticketseller" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="employeeid" />
+            </Principal>
+            <Dependent Role="ticketseller">
+              <PropertyRef Name="employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="waiter_bar_fk">
+          <End Role="bar" Type="Self.bar" Multiplicity="1" />
+          <End Role="waiter" Type="Self.waiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bar">
+              <PropertyRef Name="barid" />
+            </Principal>
+            <Dependent Role="waiter">
+              <PropertyRef Name="bar_barid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="waiter_employee_fk">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="waiter" Type="Self.waiter" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="employeeid" />
+            </Principal>
+            <Dependent Role="waiter">
+              <PropertyRef Name="employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NewBioskopModelStoreContainer">
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bar" EntityType="Self.bar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bill" EntityType="Self.bill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="drink" EntityType="Self.drink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="movie" EntityType="Self.movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="projectionroom" EntityType="Self.projectionroom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="projections" EntityType="Self.projections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="seat" EntityType="Self.seat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="snack" EntityType="Self.snack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ticket" EntityType="Self.ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ticketseller" EntityType="Self.ticketseller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="waiter" EntityType="Self.waiter" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="admin_employee_fk" Association="Self.admin_employee_fk">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="admin" EntitySet="admin" />
+          </AssociationSet>
+          <AssociationSet Name="bill_table_fk" Association="Self.bill_table_fk">
+            <End Role="Table" EntitySet="Table" />
+            <End Role="bill" EntitySet="bill" />
+          </AssociationSet>
+          <AssociationSet Name="drink_bar_fk" Association="Self.drink_bar_fk">
+            <End Role="bar" EntitySet="bar" />
+            <End Role="drink" EntitySet="drink" />
+          </AssociationSet>
+          <AssociationSet Name="projections_admin_fk" Association="Self.projections_admin_fk">
+            <End Role="admin" EntitySet="admin" />
+            <End Role="projections" EntitySet="projections" />
+          </AssociationSet>
+          <AssociationSet Name="projections_movie_fk" Association="Self.projections_movie_fk">
+            <End Role="movie" EntitySet="movie" />
+            <End Role="projections" EntitySet="projections" />
+          </AssociationSet>
+          <AssociationSet Name="projections_projectionroom_fk" Association="Self.projections_projectionroom_fk">
+            <End Role="projectionroom" EntitySet="projectionroom" />
+            <End Role="projections" EntitySet="projections" />
+          </AssociationSet>
+          <AssociationSet Name="seat_projectionroom_fk" Association="Self.seat_projectionroom_fk">
+            <End Role="projectionroom" EntitySet="projectionroom" />
+            <End Role="seat" EntitySet="seat" />
+          </AssociationSet>
+          <AssociationSet Name="snack_ticketseller_fk" Association="Self.snack_ticketseller_fk">
+            <End Role="ticketseller" EntitySet="ticketseller" />
+            <End Role="snack" EntitySet="snack" />
+          </AssociationSet>
+          <AssociationSet Name="table_waiter_fk" Association="Self.table_waiter_fk">
+            <End Role="waiter" EntitySet="waiter" />
+            <End Role="Table" EntitySet="Table" />
+          </AssociationSet>
+          <AssociationSet Name="ticket_projectionroom_fk" Association="Self.ticket_projectionroom_fk">
+            <End Role="projectionroom" EntitySet="projectionroom" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+          <AssociationSet Name="ticket_ticketseller_fk" Association="Self.ticket_ticketseller_fk">
+            <End Role="ticketseller" EntitySet="ticketseller" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+          <AssociationSet Name="ticketseller_employee_fk" Association="Self.ticketseller_employee_fk">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="ticketseller" EntitySet="ticketseller" />
+          </AssociationSet>
+          <AssociationSet Name="waiter_bar_fk" Association="Self.waiter_bar_fk">
+            <End Role="bar" EntitySet="bar" />
+            <End Role="waiter" EntitySet="waiter" />
+          </AssociationSet>
+          <AssociationSet Name="waiter_employee_fk" Association="Self.waiter_employee_fk">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="waiter" EntitySet="waiter" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NewBioskopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="employeeid" />
+          </Key>
+          <Property Name="employeeid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="employee" Relationship="Self.admin_employee_fk" FromRole="admin" ToRole="employee" />
+          <NavigationProperty Name="projections" Relationship="Self.projections_admin_fk" FromRole="admin" ToRole="projections" />
+        </EntityType>
+        <EntityType Name="bar">
+          <Key>
+            <PropertyRef Name="barid" />
+          </Key>
+          <Property Name="barid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="drinks" Relationship="Self.drink_bar_fk" FromRole="bar" ToRole="drink" />
+          <NavigationProperty Name="waiters" Relationship="Self.waiter_bar_fk" FromRole="bar" ToRole="waiter" />
+        </EntityType>
+        <EntityType Name="bill">
+          <Key>
+            <PropertyRef Name="billid" />
+          </Key>
+          <Property Name="billid" Type="Int32" Nullable="false" />
+          <Property Name="billamount" Type="Int64" />
+          <Property Name="billdatetime" Type="DateTime" Precision="3" />
+          <Property Name="table_tableid" Type="Int32" />
+          <Property Name="billid1" Type="Int32" />
+          <NavigationProperty Name="Table" Relationship="Self.bill_table_fk" FromRole="bill" ToRole="Table" />
+        </EntityType>
+        <EntityType Name="drink">
+          <Key>
+            <PropertyRef Name="drinkid" />
+          </Key>
+          <Property Name="drinkid" Type="Int32" Nullable="false" />
+          <Property Name="drinkname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="drinkprice" Type="Int64" />
+          <Property Name="bar_barid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="bar" Relationship="Self.drink_bar_fk" FromRole="drink" ToRole="bar" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="employeeid" />
+          </Key>
+          <Property Name="employeeid" Type="Int32" Nullable="false" />
+          <Property Name="employeename" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="employeeemail" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="employeeusername" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="employeepassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="employeesurname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="admin" Relationship="Self.admin_employee_fk" FromRole="employee" ToRole="admin" />
+          <NavigationProperty Name="ticketseller" Relationship="Self.ticketseller_employee_fk" FromRole="employee" ToRole="ticketseller" />
+          <NavigationProperty Name="waiter" Relationship="Self.waiter_employee_fk" FromRole="employee" ToRole="waiter" />
+        </EntityType>
+        <EntityType Name="movie">
+          <Key>
+            <PropertyRef Name="movieid" />
+          </Key>
+          <Property Name="movieid" Type="Int32" Nullable="false" />
+          <Property Name="moviegenre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="movieformat" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="movietitle" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="projections" Relationship="Self.projections_movie_fk" FromRole="movie" ToRole="projections" />
+        </EntityType>
+        <EntityType Name="projectionroom">
+          <Key>
+            <PropertyRef Name="prjroomid" />
+          </Key>
+          <Property Name="prjroomid" Type="Int32" Nullable="false" />
+          <Property Name="projectionroomname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="projections" Relationship="Self.projections_projectionroom_fk" FromRole="projectionroom" ToRole="projections" />
+          <NavigationProperty Name="seats" Relationship="Self.seat_projectionroom_fk" FromRole="projectionroom" ToRole="seat" />
+          <NavigationProperty Name="tickets" Relationship="Self.ticket_projectionroom_fk" FromRole="projectionroom" ToRole="ticket" />
+        </EntityType>
+        <EntityType Name="projection">
+          <Key>
+            <PropertyRef Name="projectionid" />
+            <PropertyRef Name="projectionroom_prjroomid" />
+            <PropertyRef Name="movie_movieid" />
+          </Key>
+          <Property Name="projectionid" Type="Int32" Nullable="false" />
+          <Property Name="projectionroom_prjroomid" Type="Int32" Nullable="false" />
+          <Property Name="admin_employeeid" Type="Int32" Nullable="false" />
+          <Property Name="movie_movieid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="admin" Relationship="Self.projections_admin_fk" FromRole="projections" ToRole="admin" />
+          <NavigationProperty Name="movie" Relationship="Self.projections_movie_fk" FromRole="projections" ToRole="movie" />
+          <NavigationProperty Name="projectionroom" Relationship="Self.projections_projectionroom_fk" FromRole="projections" ToRole="projectionroom" />
+        </EntityType>
+        <EntityType Name="seat">
+          <Key>
+            <PropertyRef Name="seatid" />
+          </Key>
+          <Property Name="seatid" Type="Int32" Nullable="false" />
+          <Property Name="seatname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="projectionroom_prjroomid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="projectionroom" Relationship="Self.seat_projectionroom_fk" FromRole="seat" ToRole="projectionroom" />
+        </EntityType>
+        <EntityType Name="snack">
+          <Key>
+            <PropertyRef Name="snackid" />
+          </Key>
+          <Property Name="snackid" Type="Int32" Nullable="false" />
+          <Property Name="snackname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="snackprice" Type="Int64" />
+          <Property Name="ticketseller_employeeid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ticketseller" Relationship="Self.snack_ticketseller_fk" FromRole="snack" ToRole="ticketseller" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="tableid" />
+          </Key>
+          <Property Name="tableid" Type="Int32" Nullable="false" />
+          <Property Name="tablename" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="waiter_employeeid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="bills" Relationship="Self.bill_table_fk" FromRole="Table" ToRole="bill" />
+          <NavigationProperty Name="waiter" Relationship="Self.table_waiter_fk" FromRole="Table" ToRole="waiter" />
+        </EntityType>
+        <EntityType Name="ticket">
+          <Key>
+            <PropertyRef Name="ticketid" />
+          </Key>
+          <Property Name="ticketid" Type="Int32" Nullable="false" />
+          <Property Name="ticketprice" Type="Int64" />
+          <Property Name="ticketmoviename" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ticketseatnumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ticketdatetime" Type="DateTime" Precision="3" />
+          <Property Name="ticketseller_employeeid" Type="Int32" Nullable="false" />
+          <Property Name="projectionroom_prjroomid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="projectionroom" Relationship="Self.ticket_projectionroom_fk" FromRole="ticket" ToRole="projectionroom" />
+          <NavigationProperty Name="ticketseller" Relationship="Self.ticket_ticketseller_fk" FromRole="ticket" ToRole="ticketseller" />
+        </EntityType>
+        <EntityType Name="ticketseller">
+          <Key>
+            <PropertyRef Name="employeeid" />
+          </Key>
+          <Property Name="employeeid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="employee" Relationship="Self.ticketseller_employee_fk" FromRole="ticketseller" ToRole="employee" />
+          <NavigationProperty Name="snacks" Relationship="Self.snack_ticketseller_fk" FromRole="ticketseller" ToRole="snack" />
+          <NavigationProperty Name="tickets" Relationship="Self.ticket_ticketseller_fk" FromRole="ticketseller" ToRole="ticket" />
+        </EntityType>
+        <EntityType Name="waiter">
+          <Key>
+            <PropertyRef Name="employeeid" />
+          </Key>
+          <Property Name="employeeid" Type="Int32" Nullable="false" />
+          <Property Name="bar_barid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="bar" Relationship="Self.waiter_bar_fk" FromRole="waiter" ToRole="bar" />
+          <NavigationProperty Name="employee" Relationship="Self.waiter_employee_fk" FromRole="waiter" ToRole="employee" />
+          <NavigationProperty Name="Tables" Relationship="Self.table_waiter_fk" FromRole="waiter" ToRole="Table" />
+        </EntityType>
+        <Association Name="admin_employee_fk">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="admin" Type="Self.admin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="employeeid" />
+            </Principal>
+            <Dependent Role="admin">
+              <PropertyRef Name="employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="projections_admin_fk">
+          <End Role="admin" Type="Self.admin" Multiplicity="1" />
+          <End Role="projections" Type="Self.projection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="admin">
+              <PropertyRef Name="employeeid" />
+            </Principal>
+            <Dependent Role="projections">
+              <PropertyRef Name="admin_employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="drink_bar_fk">
+          <End Role="bar" Type="Self.bar" Multiplicity="1" />
+          <End Role="drink" Type="Self.drink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bar">
+              <PropertyRef Name="barid" />
+            </Principal>
+            <Dependent Role="drink">
+              <PropertyRef Name="bar_barid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="waiter_bar_fk">
+          <End Role="bar" Type="Self.bar" Multiplicity="1" />
+          <End Role="waiter" Type="Self.waiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bar">
+              <PropertyRef Name="barid" />
+            </Principal>
+            <Dependent Role="waiter">
+              <PropertyRef Name="bar_barid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bill_table_fk">
+          <End Role="Table" Type="Self.Table" Multiplicity="0..1" />
+          <End Role="bill" Type="Self.bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table">
+              <PropertyRef Name="tableid" />
+            </Principal>
+            <Dependent Role="bill">
+              <PropertyRef Name="table_tableid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ticketseller_employee_fk">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="ticketseller" Type="Self.ticketseller" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="employeeid" />
+            </Principal>
+            <Dependent Role="ticketseller">
+              <PropertyRef Name="employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="waiter_employee_fk">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="waiter" Type="Self.waiter" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="employeeid" />
+            </Principal>
+            <Dependent Role="waiter">
+              <PropertyRef Name="employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="projections_movie_fk">
+          <End Role="movie" Type="Self.movie" Multiplicity="1" />
+          <End Role="projections" Type="Self.projection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movie">
+              <PropertyRef Name="movieid" />
+            </Principal>
+            <Dependent Role="projections">
+              <PropertyRef Name="movie_movieid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="projections_projectionroom_fk">
+          <End Role="projectionroom" Type="Self.projectionroom" Multiplicity="1" />
+          <End Role="projections" Type="Self.projection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projectionroom">
+              <PropertyRef Name="prjroomid" />
+            </Principal>
+            <Dependent Role="projections">
+              <PropertyRef Name="projectionroom_prjroomid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seat_projectionroom_fk">
+          <End Role="projectionroom" Type="Self.projectionroom" Multiplicity="1" />
+          <End Role="seat" Type="Self.seat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projectionroom">
+              <PropertyRef Name="prjroomid" />
+            </Principal>
+            <Dependent Role="seat">
+              <PropertyRef Name="projectionroom_prjroomid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ticket_projectionroom_fk">
+          <End Role="projectionroom" Type="Self.projectionroom" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projectionroom">
+              <PropertyRef Name="prjroomid" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="projectionroom_prjroomid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="snack_ticketseller_fk">
+          <End Role="ticketseller" Type="Self.ticketseller" Multiplicity="1" />
+          <End Role="snack" Type="Self.snack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ticketseller">
+              <PropertyRef Name="employeeid" />
+            </Principal>
+            <Dependent Role="snack">
+              <PropertyRef Name="ticketseller_employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="table_waiter_fk">
+          <End Role="waiter" Type="Self.waiter" Multiplicity="1" />
+          <End Role="Table" Type="Self.Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="waiter">
+              <PropertyRef Name="employeeid" />
+            </Principal>
+            <Dependent Role="Table">
+              <PropertyRef Name="waiter_employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ticket_ticketseller_fk">
+          <End Role="ticketseller" Type="Self.ticketseller" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ticketseller">
+              <PropertyRef Name="employeeid" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="ticketseller_employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NewBioskopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admins" EntityType="Self.admin" />
+          <EntitySet Name="bars" EntityType="Self.bar" />
+          <EntitySet Name="bills" EntityType="Self.bill" />
+          <EntitySet Name="drinks" EntityType="Self.drink" />
+          <EntitySet Name="employees" EntityType="Self.employee" />
+          <EntitySet Name="movies" EntityType="Self.movie" />
+          <EntitySet Name="projectionrooms" EntityType="Self.projectionroom" />
+          <EntitySet Name="projections" EntityType="Self.projection" />
+          <EntitySet Name="seats" EntityType="Self.seat" />
+          <EntitySet Name="snacks" EntityType="Self.snack" />
+          <EntitySet Name="Tables" EntityType="Self.Table" />
+          <EntitySet Name="tickets" EntityType="Self.ticket" />
+          <EntitySet Name="ticketsellers" EntityType="Self.ticketseller" />
+          <EntitySet Name="waiters" EntityType="Self.waiter" />
+          <AssociationSet Name="admin_employee_fk" Association="Self.admin_employee_fk">
+            <End Role="employee" EntitySet="employees" />
+            <End Role="admin" EntitySet="admins" />
+          </AssociationSet>
+          <AssociationSet Name="projections_admin_fk" Association="Self.projections_admin_fk">
+            <End Role="admin" EntitySet="admins" />
+            <End Role="projections" EntitySet="projections" />
+          </AssociationSet>
+          <AssociationSet Name="drink_bar_fk" Association="Self.drink_bar_fk">
+            <End Role="bar" EntitySet="bars" />
+            <End Role="drink" EntitySet="drinks" />
+          </AssociationSet>
+          <AssociationSet Name="waiter_bar_fk" Association="Self.waiter_bar_fk">
+            <End Role="bar" EntitySet="bars" />
+            <End Role="waiter" EntitySet="waiters" />
+          </AssociationSet>
+          <AssociationSet Name="bill_table_fk" Association="Self.bill_table_fk">
+            <End Role="Table" EntitySet="Tables" />
+            <End Role="bill" EntitySet="bills" />
+          </AssociationSet>
+          <AssociationSet Name="ticketseller_employee_fk" Association="Self.ticketseller_employee_fk">
+            <End Role="employee" EntitySet="employees" />
+            <End Role="ticketseller" EntitySet="ticketsellers" />
+          </AssociationSet>
+          <AssociationSet Name="waiter_employee_fk" Association="Self.waiter_employee_fk">
+            <End Role="employee" EntitySet="employees" />
+            <End Role="waiter" EntitySet="waiters" />
+          </AssociationSet>
+          <AssociationSet Name="projections_movie_fk" Association="Self.projections_movie_fk">
+            <End Role="movie" EntitySet="movies" />
+            <End Role="projections" EntitySet="projections" />
+          </AssociationSet>
+          <AssociationSet Name="projections_projectionroom_fk" Association="Self.projections_projectionroom_fk">
+            <End Role="projectionroom" EntitySet="projectionrooms" />
+            <End Role="projections" EntitySet="projections" />
+          </AssociationSet>
+          <AssociationSet Name="seat_projectionroom_fk" Association="Self.seat_projectionroom_fk">
+            <End Role="projectionroom" EntitySet="projectionrooms" />
+            <End Role="seat" EntitySet="seats" />
+          </AssociationSet>
+          <AssociationSet Name="ticket_projectionroom_fk" Association="Self.ticket_projectionroom_fk">
+            <End Role="projectionroom" EntitySet="projectionrooms" />
+            <End Role="ticket" EntitySet="tickets" />
+          </AssociationSet>
+          <AssociationSet Name="snack_ticketseller_fk" Association="Self.snack_ticketseller_fk">
+            <End Role="ticketseller" EntitySet="ticketsellers" />
+            <End Role="snack" EntitySet="snacks" />
+          </AssociationSet>
+          <AssociationSet Name="table_waiter_fk" Association="Self.table_waiter_fk">
+            <End Role="waiter" EntitySet="waiters" />
+            <End Role="Table" EntitySet="Tables" />
+          </AssociationSet>
+          <AssociationSet Name="ticket_ticketseller_fk" Association="Self.ticket_ticketseller_fk">
+            <End Role="ticketseller" EntitySet="ticketsellers" />
+            <End Role="ticket" EntitySet="tickets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NewBioskopModelStoreContainer" CdmEntityContainer="NewBioskopEntities">
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="NewBioskopModel.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bars">
+            <EntityTypeMapping TypeName="NewBioskopModel.bar">
+              <MappingFragment StoreEntitySet="bar">
+                <ScalarProperty Name="barid" ColumnName="barid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bills">
+            <EntityTypeMapping TypeName="NewBioskopModel.bill">
+              <MappingFragment StoreEntitySet="bill">
+                <ScalarProperty Name="billid" ColumnName="billid" />
+                <ScalarProperty Name="billamount" ColumnName="billamount" />
+                <ScalarProperty Name="billdatetime" ColumnName="billdatetime" />
+                <ScalarProperty Name="table_tableid" ColumnName="table_tableid" />
+                <ScalarProperty Name="billid1" ColumnName="billid1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="drinks">
+            <EntityTypeMapping TypeName="NewBioskopModel.drink">
+              <MappingFragment StoreEntitySet="drink">
+                <ScalarProperty Name="drinkid" ColumnName="drinkid" />
+                <ScalarProperty Name="drinkname" ColumnName="drinkname" />
+                <ScalarProperty Name="drinkprice" ColumnName="drinkprice" />
+                <ScalarProperty Name="bar_barid" ColumnName="bar_barid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="NewBioskopModel.employee">
+              <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+                <ScalarProperty Name="employeename" ColumnName="employeename" />
+                <ScalarProperty Name="employeeemail" ColumnName="employeeemail" />
+                <ScalarProperty Name="employeeusername" ColumnName="employeeusername" />
+                <ScalarProperty Name="employeepassword" ColumnName="employeepassword" />
+                <ScalarProperty Name="employeesurname" ColumnName="employeesurname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movies">
+            <EntityTypeMapping TypeName="NewBioskopModel.movie">
+              <MappingFragment StoreEntitySet="movie">
+                <ScalarProperty Name="movieid" ColumnName="movieid" />
+                <ScalarProperty Name="moviegenre" ColumnName="moviegenre" />
+                <ScalarProperty Name="movieformat" ColumnName="movieformat" />
+                <ScalarProperty Name="movietitle" ColumnName="movietitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projectionrooms">
+            <EntityTypeMapping TypeName="NewBioskopModel.projectionroom">
+              <MappingFragment StoreEntitySet="projectionroom">
+                <ScalarProperty Name="prjroomid" ColumnName="prjroomid" />
+                <ScalarProperty Name="projectionroomname" ColumnName="projectionroomname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projections">
+            <EntityTypeMapping TypeName="NewBioskopModel.projection">
+              <MappingFragment StoreEntitySet="projections">
+                <ScalarProperty Name="projectionid" ColumnName="projectionid" />
+                <ScalarProperty Name="projectionroom_prjroomid" ColumnName="projectionroom_prjroomid" />
+                <ScalarProperty Name="admin_employeeid" ColumnName="admin_employeeid" />
+                <ScalarProperty Name="movie_movieid" ColumnName="movie_movieid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seats">
+            <EntityTypeMapping TypeName="NewBioskopModel.seat">
+              <MappingFragment StoreEntitySet="seat">
+                <ScalarProperty Name="seatid" ColumnName="seatid" />
+                <ScalarProperty Name="seatname" ColumnName="seatname" />
+                <ScalarProperty Name="projectionroom_prjroomid" ColumnName="projectionroom_prjroomid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="snacks">
+            <EntityTypeMapping TypeName="NewBioskopModel.snack">
+              <MappingFragment StoreEntitySet="snack">
+                <ScalarProperty Name="snackid" ColumnName="snackid" />
+                <ScalarProperty Name="snackname" ColumnName="snackname" />
+                <ScalarProperty Name="snackprice" ColumnName="snackprice" />
+                <ScalarProperty Name="ticketseller_employeeid" ColumnName="ticketseller_employeeid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tables">
+            <EntityTypeMapping TypeName="NewBioskopModel.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="tableid" ColumnName="tableid" />
+                <ScalarProperty Name="tablename" ColumnName="tablename" />
+                <ScalarProperty Name="waiter_employeeid" ColumnName="waiter_employeeid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tickets">
+            <EntityTypeMapping TypeName="NewBioskopModel.ticket">
+              <MappingFragment StoreEntitySet="ticket">
+                <ScalarProperty Name="ticketid" ColumnName="ticketid" />
+                <ScalarProperty Name="ticketprice" ColumnName="ticketprice" />
+                <ScalarProperty Name="ticketmoviename" ColumnName="ticketmoviename" />
+                <ScalarProperty Name="ticketseatnumber" ColumnName="ticketseatnumber" />
+                <ScalarProperty Name="ticketdatetime" ColumnName="ticketdatetime" />
+                <ScalarProperty Name="ticketseller_employeeid" ColumnName="ticketseller_employeeid" />
+                <ScalarProperty Name="projectionroom_prjroomid" ColumnName="projectionroom_prjroomid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ticketsellers">
+            <EntityTypeMapping TypeName="NewBioskopModel.ticketseller">
+              <MappingFragment StoreEntitySet="ticketseller">
+                <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="waiters">
+            <EntityTypeMapping TypeName="NewBioskopModel.waiter">
+              <MappingFragment StoreEntitySet="waiter">
+                <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+                <ScalarProperty Name="bar_barid" ColumnName="bar_barid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

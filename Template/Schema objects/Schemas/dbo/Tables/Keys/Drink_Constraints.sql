@@ -1,0 +1,1 @@
+ALTER TABLE drink ADD CONSTRAINT drink_pk PRIMARY KEY ( drinkid );

@@ -1,0 +1,1 @@
+ALTER TABLE movie ADD CONSTRAINT movie_pk PRIMARY KEY ( movieid );

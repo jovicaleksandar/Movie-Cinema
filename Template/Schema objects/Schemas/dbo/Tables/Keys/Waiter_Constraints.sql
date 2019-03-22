@@ -1,0 +1,1 @@
+ALTER TABLE waiter ADD CONSTRAINT waiter_pk PRIMARY KEY ( employeeid );

@@ -1,0 +1,1 @@
+ALTER TABLE ticketseller ADD CONSTRAINT ticketseller_pk PRIMARY KEY ( employeeid );
